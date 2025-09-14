@@ -20,28 +20,35 @@ export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Prevent background scroll when menu is open
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+
   return (
-    <header className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-2 bg-transparent">
-      {/* Left: Empty for spacing */}
-      <div className="w-12 h-12" />
+    <>
+      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-3 bg-black/90 backdrop-blur-md">
+        {/* Left: Empty for spacing */}
+        <div className="w-12 h-12" />
 
-      {/* Center: Logo */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none"
-        onClick={() => navigate('/')}
-        aria-label="Go to home page"
-      >
-        <img src={LOGO_SRC} alt="Aura Cuts Logo" className="h-20 w-auto max-h-[64px] drop-shadow-lg mt-2" />
-      </div>
+        {/* Center: Logo */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none"
+          onClick={() => navigate('/')}
+          aria-label="Go to home page"
+        >
+          <img src={LOGO_SRC} alt="Aura Cuts Logo" className="h-14 md:h-16 w-auto drop-shadow-lg" />
+        </div>
 
-      {/* Right: Nav button */}
-      <button
-        className="ml-auto z-40 flex items-center justify-center w-12 h-12 rounded-full bg-[var(--secondary-color)] hover:bg-yellow-400 text-black focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]"
-        aria-label="Open navigation menu"
-        onClick={() => setMenuOpen(true)}
-      >
-        <FiMenu size={32} />
-      </button>
+        {/* Right: Nav button */}
+        <button
+          className="ml-auto z-40 flex items-center justify-center w-12 h-12 rounded-full bg-[var(--secondary-color)] hover:bg-yellow-400 text-black focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]"
+          aria-label="Open navigation menu"
+          onClick={() => setMenuOpen(true)}
+        >
+          <FiMenu size={32} />
+        </button>
+      </header>
 
       {/* Fullscreen Navigation Menu */}
       <AnimatePresence>
@@ -51,7 +58,7 @@ export const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/95 flex flex-col items-center justify-center z-50"
+            className="fixed inset-0 bg-black/95 flex flex-col items-center justify-center z-[60]"
           >
             {/* Close button */}
             <button
@@ -70,7 +77,7 @@ export const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 

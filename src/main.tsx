@@ -5,7 +5,7 @@ import { RouterProvider } from "react-router/dom";
 import './index.css'
 import { LandingPage } from './pages/Landing';
 import { OurStoryPage } from './pages/OurStory';
-import { BookingProvider } from './context/BookingContext';
+import { BookingProvider } from './context/BookingContext'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BookingProvider>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </BookingProvider>
   </StrictMode>,
 )
